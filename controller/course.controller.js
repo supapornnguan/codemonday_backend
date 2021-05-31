@@ -2,24 +2,23 @@ const db = require("../models");
 const Course = db.Course;
 const Op = db.Sequelize.Op;
 
-// Create and Save a new Teacher
+
 exports.create = (req, res) => {
-    // Validate request
+
     if (!req.body.course_name) {
       res.status(400).send({
         message: "Content can not be empty!"
       });
       return;
     }
-  
-    // Create a Tutorial
+
     const course = {
       course_name: req.body.course_name,
       course_description: req.body.course_description,
       teacher_id: req.body.teacher_id
     };
   
-    // Save Tutorial in the database
+
     Course.create(course)
       .then(data => {
         res.send(data);
@@ -31,7 +30,7 @@ exports.create = (req, res) => {
         });
       });
   };
-// Retrieve all Tutorials from the database.
+
 exports.findAll = (req, res) => {
     Course.findAll()
       .then(data => {
@@ -45,20 +44,11 @@ exports.findAll = (req, res) => {
       });
   };
 
-// Find a single Tutorial with an id
-exports.findOne = (req, res) => {
-  
-};
 
-// Update a Tutorial by the id in the request
-exports.update = (req, res) => {
-  
-};
 
-// Delete a Tutorial with the specified id in the request
 exports.delete = (req, res) => {
     const id = req.params.id;
-  
+
     Course.destroy({
       where: { id: id }
     })
@@ -79,13 +69,3 @@ exports.delete = (req, res) => {
         });
       });
   };
-
-// Delete all Tutorials from the database.
-exports.deleteAll = (req, res) => {
-  
-};
-
-// Find all published Tutorials
-exports.findAllPublished = (req, res) => {
-  
-};
